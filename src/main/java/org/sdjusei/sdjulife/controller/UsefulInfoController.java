@@ -42,7 +42,7 @@ public class UsefulInfoController {
 	}
 
 	@ApiOperation("学生手册更新")
-	@GetMapping("/handbook")
+	@GetMapping("/update-handbook")
 	public String updateHandbook(){
 		return "";
 	}
