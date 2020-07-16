@@ -7,26 +7,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "信息反馈接口")
+@Api(tags = "校历接口")
 @RestController
-@RequestMapping("/feedback")
-public class FeedbackController {
+@RequestMapping("/calendar")
+public class SchoolCalendarController {
 
-	@ApiOperation("提交反馈")
-	@PostMapping("/submit")
-	public String submit(){
-		return "";
-	}
-
-	@ApiOperation("查看反馈")
-	@PostMapping("/query")
+	@ApiOperation("事件查询")
+	@GetMapping("/query")
 	public String query(){
 		return "";
 	}
 
-	@ApiOperation("删除反馈")
-	@GetMapping("/delete")
+	@ApiOperation("增加事件")
+	@PostMapping("/add")
+	public String add(){
+		return "";
+	}
+
+	@ApiOperation("修改事件")
+	@PostMapping("/update")
+	public String update(){
+		return "";
+	}
+
+	@ApiOperation("删除事件")
+	@PostMapping("/delete")
 	public String delete(){
 		return "";
 	}
+
 }

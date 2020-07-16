@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/card")
 public class CardController {
 
-	@ApiOperation("获取余额")
+	@ApiOperation("余额查询")
 	@PostMapping("/balance")
 	public String getBalance(){
 		return "";
 	}
 
-	@ApiOperation("获取交易信息")
+	@ApiOperation("交易信息查询")
 	@GetMapping("/transaction-record")
 	public String getRecord(){
 		return "";

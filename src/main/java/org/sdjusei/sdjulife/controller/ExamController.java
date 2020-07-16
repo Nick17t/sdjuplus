@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/exam")
 public class ExamController {
 
-	@ApiOperation("获取考试信息")
+	@ApiOperation("考试信息查询")
 	@GetMapping("/exam")
 	public String getExam(){
 		return "";

@@ -28,4 +28,23 @@ public class UsefulInfoController {
 	public String handbook(){
 		return "";
 	}
+
+	@ApiOperation("校车更新")
+	@GetMapping("/update-bus")
+	public String updateBus(){
+		return "";
+	}
+
+	@ApiOperation("电话黄页更新")
+	@GetMapping("/update-yellow-page")
+	public String updateYellowPage(){
+		return "";
+	}
+
+	@ApiOperation("学生手册更新")
+	@GetMapping("/handbook")
+	public String updateHandbook(){
+		return "";
+	}
+
 }

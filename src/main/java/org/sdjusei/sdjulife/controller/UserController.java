@@ -6,10 +6,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "用户接口")
+@Api(tags = "小程序用户接口")
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+	@ApiOperation("注册")
+	@PostMapping("/register")
+	public String register(){
+		return "";
+	}
 
 	@ApiOperation("登录")
 	@GetMapping("/login")

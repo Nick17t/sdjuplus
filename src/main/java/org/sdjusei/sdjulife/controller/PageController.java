@@ -6,16 +6,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
-@Api(tags="课程接口")
+@Api(tags = "页面设置接口")
 @RestController
-@RequestMapping("/course")
-public class CourseController {
+@RequestMapping("/main-page")
+public class PageController {
 
-	@ApiOperation("课表查询")
-	@PostMapping("/timetable")
-	public String getCourses() {
+	@ApiOperation("设置首页按钮")
+	@PostMapping("/set-btn")
+	public String setButton(){
+		return "";
+	}
+
+	@ApiOperation("设置首页背景图")
+	@PostMapping("/set-pic")
+	public String setBackPicture(){
 		return "";
 	}
 }

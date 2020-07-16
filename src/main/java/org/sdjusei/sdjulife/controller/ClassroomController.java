@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/classroom")
 public class ClassroomController {
 
-	@ApiOperation("获取空闲教室")
+	@ApiOperation("空闲教室查询")
 	@GetMapping("/empty-classroom")
 	public String getEmptyClassroom(){
 		return "";
