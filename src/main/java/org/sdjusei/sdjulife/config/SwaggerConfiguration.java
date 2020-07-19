@@ -14,6 +14,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * knife4j配置类
+ *
+ * @author zhaochenzhi
+ * @date 2020/07/13
+ */
 @Configuration
 @EnableSwagger2
 @EnableKnife4j
@@ -35,7 +41,7 @@ public class SwaggerConfiguration {
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				.title("电机生活小程序") //设置文档的标题
-				.contact(new Contact("电机生活小程序开发组","无","无"))
+				.contact(new Contact("电机生活小程序开发组", "无", "无"))
 				.description("电机生活小程序API接口文档") // 设置文档的描述
 				.version(VERSION) // 设置文档的版本信息-> 1.0.0 Version information
 				//.termsOfServiceUrl("http://www.baidu.com") // 设置文档的License信息->1.3 License information

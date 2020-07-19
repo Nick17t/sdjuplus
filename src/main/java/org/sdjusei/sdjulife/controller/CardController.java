@@ -7,21 +7,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-@Api(tags="校园卡接口")
+/**
+ * 校园卡控制层
+ *
+ * @author zcz
+ * @date 2020/07/13
+ */
+@Api(tags = "校园卡接口")
 @RestController
 @RequestMapping("/card")
 public class CardController {
 
 	@ApiOperation("余额查询")
 	@PostMapping("/balance")
-	public String getBalance(){
+	public String getBalance() {
 		return "";
 	}
 
 	@ApiOperation("交易信息查询")
 	@GetMapping("/transaction-record")
-	public String getRecord(){
+	public String getRecord() {
 		return "";
 	}
 }

@@ -1,25 +1,43 @@
 package org.sdjusei.sdjulife.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.sdjusei.sdjulife.domain.UserLoginMsg;
+import org.sdjusei.sdjulife.service.UserLoginService;
+import org.sdjusei.sdjulife.service.UserMngService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
+/**
+ * 小程序用户控制层，
+ * 控制用户的登录、退出登录、注销和修改信息
+ *
+ * @author zcz
+ * @date 2020/07/07
+ */
 @Api(tags = "小程序用户接口")
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-	@ApiOperation("注册")
-	@PostMapping("/register")
-	public String register(){
-		return "";
-	}
+	@Resource
+	private UserLoginService userLoginService;
+	@Resource
+	private UserMngService userMngService;
 
 	@ApiOperation("登录")
-	@GetMapping("/login")
-	public String login() {
+	@ApiOperationSupport(includeParameters = {"loginMsg.code", "loginMsg.platform"})
+	@PostMapping("/login")
+	public String login(@RequestBody UserLoginMsg userLoginMsg) {
+		try {
+			userLoginService.login(userLoginMsg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "";
 	}
 
@@ -31,8 +49,8 @@ public class UserController {
 
 	@ApiOperation("修改信息")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "username", value = "用户名", dataType = "String",paramType = "query"),
-			@ApiImplicitParam(name = "studentnumber", value = "学号", dataType = "String",paramType = "path")
+			@ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "studentId", value = "学号", dataType = "String", paramType = "path")
 	})
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "修改成功"),
@@ -48,6 +66,5 @@ public class UserController {
 	public String logoff() {
 		return "";
 	}
-
 
 }

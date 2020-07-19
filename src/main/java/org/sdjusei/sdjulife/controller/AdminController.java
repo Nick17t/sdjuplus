@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 管理用户控制层
+ *
+ * @author zcz
+ * @date 2020/07/16
+ */
 @Api(tags = "管理系统用户接口")
 @RestController
 @RequestMapping("/manager")
@@ -14,13 +20,13 @@ public class AdminController {
 
 	@ApiOperation("添加用户")
 	@PostMapping("/add")
-	public String add(){
+	public String add() {
 		return "";
 	}
 
 	@ApiOperation("用户登录")
 	@PostMapping("/login")
-	public String login(){
+	public String login() {
 		return "";
 	}
 
@@ -31,8 +37,8 @@ public class AdminController {
 	}
 
 	@ApiOperation("查询用户")
-	@GetMapping("/query")
-	public String query(){
+	@GetMapping("/list")
+	public String list() {
 		return "";
 	}
 

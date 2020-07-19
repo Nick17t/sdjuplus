@@ -1,23 +1,26 @@
 package org.sdjusei.sdjulife;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.sdjusei.sdjulife.domain.UserLoginMsg;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.Resource;
 
 @SpringBootTest
-@WebMvcTest
-@AutoConfigureRestDocs
+//@WebMvcTest
 class SdjulifeApplicationTests {
 
+//	@Resource
+//	private MockMvc mockMvc;
+
 	@Resource
-	private MockMvc mockMvc;
+	public UserLoginMsg userLoginMsg;
 
 	@Test
 	void contextLoads() {
+		userLoginMsg.setCode("123");
+		userLoginMsg.setPlatform("wx");
+		System.out.println(userLoginMsg);
 	}
 
 }
