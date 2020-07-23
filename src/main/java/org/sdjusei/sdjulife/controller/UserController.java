@@ -1,9 +1,11 @@
 package org.sdjusei.sdjulife.controller;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
+import org.sdjusei.sdjulife.domain.Result;
 import org.sdjusei.sdjulife.domain.UserLoginMsg;
+import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.service.UserLoginService;
+import org.sdjusei.sdjulife.service.UserLogoffService;
 import org.sdjusei.sdjulife.service.UserMngService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,23 +30,19 @@ public class UserController {
 	private UserLoginService userLoginService;
 	@Resource
 	private UserMngService userMngService;
+	@Resource
+	private UserLogoffService userLogoffService;
 
 	@ApiOperation("登录")
-	@ApiOperationSupport(includeParameters = {"loginMsg.code", "loginMsg.platform"})
 	@PostMapping("/login")
-	public String login(@RequestBody UserLoginMsg userLoginMsg) {
+	public Result login(@RequestBody UserLoginMsg userLoginMsg) {
+		String token = null;
 		try {
-			userLoginService.login(userLoginMsg);
+			token = userLoginService.login(userLoginMsg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "";
-	}
-
-	@ApiOperation("退出登录")
-	@PostMapping("/logout")
-	public String logout() {
-		return "";
+		return new Result(ResultEnum.SUCCESS, token);
 	}
 
 	@ApiOperation("修改信息")
@@ -63,8 +61,9 @@ public class UserController {
 
 	@ApiOperation("注销")
 	@PostMapping("/logoff")
-	public String logoff() {
-		return "";
+	public Result logoff(String token) {
+		userLogoffService.logoff(token);
+		return new Result(ResultEnum.SUCCESS,"");
 	}
 
 }

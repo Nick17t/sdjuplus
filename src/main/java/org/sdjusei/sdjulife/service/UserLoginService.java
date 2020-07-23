@@ -24,8 +24,7 @@ public class UserLoginService {
 
 	@Resource
 	private OpenidUtil openidUtil;
-	@Resource
-	private ObjectMapper mapper;
+
 	@Resource
 	private UserDao userDao;
 
@@ -33,13 +32,12 @@ public class UserLoginService {
 	 * 登录
 	 *
 	 * @param userLoginMsg 登录请求，包含小程序签发的code和平台标记（标记请求来源）
-	 * @return
+	 * @return 登录成功时，返回Token
 	 * @throws Exception
 	 */
 	public String login(UserLoginMsg userLoginMsg) throws Exception {
 		//使用传来的code向相应平台的API请求openid和session_key，存入对应的实体类中
-		String rawData = openidUtil.jscode2Session(userLoginMsg.getCode(), userLoginMsg.getPlatform());
-		Code2SessionResult code2SessionResult = mapper.readValue(rawData, Code2SessionResult.class);
+		Code2SessionResult code2SessionResult = openidUtil.jscode2Session(userLoginMsg.getCode(), userLoginMsg.getPlatform());
 
 		//检查用户是否存在，不存在则进行“注册”，无论是否存在，最后都要通过userId生成Token返回给前端
 		User user = userDao.searchUserByOpenid(code2SessionResult.getOpenId());
@@ -51,7 +49,7 @@ public class UserLoginService {
 	/**
 	 * 注册
 	 *
-	 * @param openid   从微信或QQ的API获取到的openid
+	 * @param openid 从微信或QQ的API获取到的openid
 	 * @param platform 请求发起平台
 	 * @return 返回注册后的用户实体
 	 */
@@ -62,6 +60,4 @@ public class UserLoginService {
 			userDao.insertUserFromQq(openid);
 		return userDao.searchUserByOpenid(openid);
 	}
-
-
 }
