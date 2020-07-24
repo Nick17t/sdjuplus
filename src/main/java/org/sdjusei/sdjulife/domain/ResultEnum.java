@@ -20,16 +20,21 @@ public enum ResultEnum {
 	UNKNOWN_ERROR("-1", "未知错误"),
 	SUCCESS("00000", "请求成功"),
 	USER_ERROR("A00001", "用户端错误"),
+	TOKEN_INVALID("A00100", "token无效"),
 
 	SERVER_ERROR("B00001", "服务端错误"),
+	TOKEN_CREATE_ERROR("B00010", "token创建失败"),
+	USER_REGISTER_FAIL("B00020", "用户注册失败"),
+	USER_LOGOFF_FAIL("B00021", "用户注销失败"),
+	USER_UPDATE_FAIL("B00022","用户信息更新失败"),
 
 	THIRD_PARTY_ERROR("C00001", "第三方服务错误"),
-	OPENID_ERROR("C00100","openid获取错误"),
-	OPENID_GET_TIMEOUT_ERROR("C00101","openid获取超时"),
-	PLATFORM_PARAMETER_ERROR("C00102","不合法的登录平台参数"),
-	OPENID_SERVER_BUSY_ERROR("C00103","openid服务器繁忙"),
-	OPENID_GET_TOO_FREQUENTLY_ERROR("C00104","openid获取太频繁"),
-	CODE_INVALID_ERROR("C00105","登录code无效");
+	OPENID_GET_ERROR("C00100", "openid获取错误"),
+	OPENID_GET_TIMEOUT("C00101", "openid获取超时"),
+	PLATFORM_PARAMETER_ILLEGAL("C00102", "不合法的登录平台参数"),
+	OPENID_SERVER_BUSY("C00103", "openid服务器繁忙"),
+	OPENID_GET_TOO_FREQUENTLY("C00104", "openid获取太频繁"),
+	CODE_INVALID("C00105", "登录code无效");
 	private final String code;
 	private final String message;
 }

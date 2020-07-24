@@ -1,6 +1,8 @@
 package org.sdjusei.sdjulife.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.sdjusei.sdjulife.domain.User;
 
@@ -19,12 +21,13 @@ public interface UserDao {
 	User searchUserById(Integer userId);
 
 	@Insert("INSERT INTO user(wx_openid) VALUES(#{openid)")
-	Integer insertUserFromWx(String openid);
+	int insertUserFromWx(String openid);
 
 	@Insert("INSERT INTO user(qq_openid) VALUES(#{openid)")
-	Integer insertUserFromQq(String openid);
+	int insertUserFromQq(String openid);
 
-//	Integer deleteUserById(User user);
+	@Delete("DELETE user WHERE id=#{userId}")
+	int deleteUserById(Integer userId);
 
-//	Integer updateUser(User user);
+	int updateUser(User user);
 }

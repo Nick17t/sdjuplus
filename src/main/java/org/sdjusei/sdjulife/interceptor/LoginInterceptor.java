@@ -1,5 +1,6 @@
 package org.sdjusei.sdjulife.interceptor;
 
+import org.sdjusei.sdjulife.util.TokenUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,8 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		//TODO 登录状态（Token有效）判断逻辑待写
-		return false;
+		String token = request.getHeader("token");
+
+		//TODO 开发模式下，没有token也放行，上线后应改为抛出异常
+		if(token==null)
+			return true;
+
+		//如果验证失败会被异常处理器拦截处理
+		TokenUtil.verifyJwtToken(token);
+
+		//验证成功则放行
+		return true;
 	}
 
 	@Override

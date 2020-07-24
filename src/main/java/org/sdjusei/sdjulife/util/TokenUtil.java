@@ -17,7 +17,13 @@ import java.util.Date;
  */
 @Component
 public class TokenUtil {
+	/**
+	 * SECRET字段
+	 */
 	private static final String SECRET = "SDJUPLUS IS HARD TO DEVELOP.";
+	/**
+	 * 签发者
+	 */
 	private static final String ISSUER = "SDJUSEI";
 	private static long EXPIRE_TIME;
 
@@ -29,15 +35,16 @@ public class TokenUtil {
 	/**
 	 * 创建Token
 	 *
-	 * @param id 任意ID
+	 * @param userId 用户ID
 	 * @return 返回生成的Token
+	 * @throws JWTCreationException token创建异常
 	 */
-	public static String createJwtToken(String id) {
+	public static String createJwtToken(String userId) {
 		return JWT.create()
 				.withIssuer(ISSUER)
 				.withIssuedAt(new Date())
 				.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE_TIME))
-				.withClaim("id", id)
+				.withClaim("user_id", userId)
 				.sign(Algorithm.HMAC256(SECRET));
 	}
 
@@ -45,12 +52,13 @@ public class TokenUtil {
 	 * 验证Token有效性
 	 *
 	 * @param token 包含token的字符串
-	 * @throws AlgorithmMismatchException
+	 * @throws JWTVerificationException       总的验证异常，下面都是其子异常
+	 * @throws AlgorithmMismatchException     算法不匹配
 	 * @throws SignatureVerificationException 签名无效
 	 * @throws TokenExpiredException          Token过期
 	 * @throws InvalidClaimException          claim中的信息无效
 	 */
-	public static void verifyJwtToken(String token) throws JWTVerificationException {
+	public static void verifyJwtToken(String token) {
 		DecodedJWT jwt = JWT.require(Algorithm.HMAC256(SECRET))
 				.withIssuer(ISSUER)
 				.build()
@@ -58,14 +66,15 @@ public class TokenUtil {
 	}
 
 	/**
-	 * Token解码，获取payload中的身份信息
+	 * Token解码，底层先验证，再获取payload中的身份信息
 	 *
 	 * @param token 包含Token的字符串
 	 * @return 返回Token中的信息
+	 * @throws JWTDecodeException 解码异常，是验证异常的子类
 	 */
-	public static String decodeJwtToken(String token) {
+	public static Integer decodeJwtToken(String token) {
 		return JWT.decode(token)
-				.getClaim("openid")
-				.asString();
+				.getClaim("user_id")
+				.asInt();
 	}
 }

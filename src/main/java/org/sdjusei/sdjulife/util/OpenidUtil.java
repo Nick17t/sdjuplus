@@ -7,11 +7,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.UnsupportedMimeTypeException;
 import org.sdjusei.sdjulife.domain.Code2SessionResult;
 import org.sdjusei.sdjulife.domain.ResultEnum;
-import org.sdjusei.sdjulife.exception.OpenidGetException;
+import org.sdjusei.sdjulife.exception.CommonException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,18 +25,16 @@ import java.util.Map;
  */
 @Component
 public class OpenidUtil {
-	@Value("${wx.openid.url}")
-	private String WX_OPENID_URL;
-	@Value("${wx.app.id}")
-	private String WX_APP_ID;
-	@Value("${wx.app.secret}")
-	private String WX_SECRET;
-//	@Value("${qq.openid.url}")
-//	private String QQ_OPENID_URL;
-//	@Value("${qq.app.id}")
-//	private String QQ_APP_ID;
-//	@Value("${qq.app.secret}")
-//	private String QQ_SECRET;
+
+	private static String WX_OPENID_URL;
+	private static String WX_APP_ID;
+	private static String WX_SECRET;
+	private static String QQ_OPENID_URL;
+	private static String QQ_APP_ID;
+	private static String QQ_SECRET;
+	/**
+	 * Jackson的转换类
+	 */
 	@Resource
 	private ObjectMapper objectMapper;
 
@@ -45,25 +44,28 @@ public class OpenidUtil {
 	 * @param code     小程序提供的一次性登录用的code
 	 * @param platform 小程序平台
 	 * @return 以字符串形式返回API返回的JSON对象
-	 * @throws SocketTimeoutException 请求超时
+	 * @throws SocketTimeoutException       请求超时
 	 * @throws UnsupportedMimeTypeException 不知道是啥异常
-	 * @throws HttpStatusException 不知道是啥异常
-	 * @throws OpenidGetException 自定义的openid获取异常，处理腾讯服务器返回的错误码
+	 * @throws HttpStatusException          不知道是啥异常
+	 * @throws CommonException              自定义异常
 	 */
-	public Code2SessionResult jscode2Session(String code, String platform) throws Exception {
+	public Code2SessionResult jscode2Session(String code, String platform) throws IOException {
 		String openIdUrl = null, appId = null, secret = null;
+
+		//判断请求的平台
 		if ("wx".equalsIgnoreCase(platform)) {
 			openIdUrl = WX_OPENID_URL;
 			appId = WX_APP_ID;
 			secret = WX_SECRET;
+		} else if ("qq".equalsIgnoreCase(platform)) {
+			openIdUrl = QQ_OPENID_URL;
+			appId = QQ_APP_ID;
+			secret = QQ_SECRET;
+		} else {
+			throw new CommonException(ResultEnum.PLATFORM_PARAMETER_ILLEGAL);
 		}
-//		else if("qq".equalsIgnoreCase(platform)){
-//			openIdUrl=QQ_OPENID_URL;
-//			appId=QQ_APP_ID;
-//			secret=QQ_SECRET;
-//		}
-		else
-			throw new OpenidGetException(ResultEnum.PLATFORM_PARAMETER_ERROR);
+
+		//使用Jsoup获取openid和session_key
 		Map<String, String> parameterMap = new HashMap<>();
 		parameterMap.put("appid", appId);
 		parameterMap.put("secret", secret);
@@ -74,15 +76,48 @@ public class OpenidUtil {
 				.method(Connection.Method.GET)
 				.execute();
 		Code2SessionResult code2SessionResult = objectMapper.readValue(response.body(), Code2SessionResult.class);
-		if("-1".equals(code2SessionResult.getErrCode()))
-			throw new OpenidGetException(ResultEnum.OPENID_SERVER_BUSY_ERROR);
-		else if("45011".equals(code2SessionResult.getErrCode()))
-			throw new OpenidGetException(ResultEnum.OPENID_GET_TOO_FREQUENTLY_ERROR);
-		else if("40029".equals(code2SessionResult.getErrCode()))
-			throw new OpenidGetException(ResultEnum.CODE_INVALID_ERROR);
-		else if("0".equals(code2SessionResult.getErrCode()))
+
+		//根据返回的errCode，抛出异常，进行统一处理
+		if ("-1".equals(code2SessionResult.getErrCode())) {
+			throw new CommonException(ResultEnum.OPENID_SERVER_BUSY);
+		} else if ("45011".equals(code2SessionResult.getErrCode())) {
+			throw new CommonException(ResultEnum.OPENID_GET_TOO_FREQUENTLY);
+		} else if ("40029".equals(code2SessionResult.getErrCode())) {
+			throw new CommonException(ResultEnum.CODE_INVALID);
+		} else if ("0".equals(code2SessionResult.getErrCode())) {
 			return code2SessionResult;
-		else
-			throw new OpenidGetException(ResultEnum.OPENID_ERROR);
+		} else {
+			throw new CommonException(ResultEnum.OPENID_GET_ERROR);
+		}
+	}
+
+	@Value("${wx.openid.url}")
+	public static void setWxOpenidUrl(String wxOpenidUrl) {
+		WX_OPENID_URL = wxOpenidUrl;
+	}
+
+	@Value("${wx.app.id}")
+	public static void setWxAppId(String wxAppId) {
+		WX_APP_ID = wxAppId;
+	}
+
+	@Value("${wx.app.secret}")
+	public static void setWxSecret(String wxSecret) {
+		WX_SECRET = wxSecret;
+	}
+
+	@Value("${qq.openid.url}")
+	public static void setQqOpenidUrl(String qqOpenidUrl) {
+		QQ_OPENID_URL = qqOpenidUrl;
+	}
+
+	@Value("${qq.app.id}")
+	public static void setQqAppId(String qqAppId) {
+		QQ_APP_ID = qqAppId;
+	}
+
+	@Value("${qq.app.secret}")
+	public static void setQqSecret(String qqSecret) {
+		QQ_SECRET = qqSecret;
 	}
 }

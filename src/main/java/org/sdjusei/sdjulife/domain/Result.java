@@ -17,7 +17,18 @@ public class Result {
 	public Result() {
 	}
 
-	public Result(ResultEnum resultEnum){
+	public Result(String code, String message) {
+		this.code = code;
+		this.message = message;
+	}
+
+	public Result(String code, String message, Object data) {
+		this.code = code;
+		this.message = message;
+		this.data = data;
+	}
+
+	public Result(ResultEnum resultEnum) {
 		this.code = resultEnum.getCode();
 		this.message = resultEnum.getMessage();
 	}

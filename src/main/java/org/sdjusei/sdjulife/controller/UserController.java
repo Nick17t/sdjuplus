@@ -1,18 +1,18 @@
 package org.sdjusei.sdjulife.controller;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.sdjusei.sdjulife.domain.Result;
-import org.sdjusei.sdjulife.domain.UserLoginMsg;
 import org.sdjusei.sdjulife.domain.ResultEnum;
+import org.sdjusei.sdjulife.domain.User;
+import org.sdjusei.sdjulife.domain.UserLoginMsg;
 import org.sdjusei.sdjulife.service.UserLoginService;
-import org.sdjusei.sdjulife.service.UserLogoffService;
 import org.sdjusei.sdjulife.service.UserMngService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 /**
  * 小程序用户控制层，
@@ -31,39 +31,59 @@ public class UserController {
 	@Resource
 	private UserMngService userMngService;
 	@Resource
-	private UserLogoffService userLogoffService;
+	private HttpServletRequest request;
 
+	/**
+	 * 登录Controller方法
+	 *
+	 * @param userLoginMsg 登录信息，包含小程序给的code和平台标记
+	 * @return 返回成功信息和token
+	 * @throws IOException 包含token创建失败、获取openid失败等，统一由异常处理器处理
+	 */
 	@ApiOperation("登录")
 	@PostMapping("/login")
-	public Result login(@RequestBody UserLoginMsg userLoginMsg) {
-		String token = null;
-		try {
-			token = userLoginService.login(userLoginMsg);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public Result login(@RequestBody UserLoginMsg userLoginMsg) throws IOException {
+		String token = userLoginService.login(userLoginMsg);
 		return new Result(ResultEnum.SUCCESS, token);
 	}
 
+	/**
+	 * 修改信息Controller方法
+	 *
+	 * @return 成功返回成功信息，失败则抛出异常
+	 */
 	@ApiOperation("修改信息")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "studentId", value = "学号", dataType = "String", paramType = "path")
-	})
-	@ApiResponses({
-			@ApiResponse(code = 200, message = "修改成功"),
-			@ApiResponse(code = 404, message = "请求路径无效")
-	})
 	@PostMapping("/update")
-	public String updateInfo() {
-		return "";
+	public Result updateInfo(@RequestBody User user) {
+		String token = request.getHeader("token");
+		userMngService.updateInfo(token, user);
+		return new Result(ResultEnum.SUCCESS);
 	}
 
+	/**
+	 * 注销Controller方法
+	 *
+	 * @return 成功返回成功信息，失败则抛出异常
+	 */
 	@ApiOperation("注销")
 	@PostMapping("/logoff")
-	public Result logoff(String token) {
-		userLogoffService.logoff(token);
-		return new Result(ResultEnum.SUCCESS,"");
+	public Result logoff() {
+		String token = request.getHeader("token");
+		userMngService.delete(token);
+		return new Result(ResultEnum.SUCCESS);
 	}
 
+	@ApiOperation("查询所有用户")
+	@GetMapping("/query")
+	public Result query() {
+		//TODO 查询待完成（包括分页等功能）
+		return new Result(ResultEnum.SUCCESS);
+	}
+
+	@ApiOperation("查询单个用户")
+	@GetMapping
+	public Result searchByStuId() {
+		//TODO 待完成
+		return new Result(ResultEnum.SUCCESS);
+	}
 }
