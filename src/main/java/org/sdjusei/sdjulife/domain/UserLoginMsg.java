@@ -1,5 +1,6 @@
 package org.sdjusei.sdjulife.domain;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import lombok.Data;
  * @date 2020/07/17
  */
 @Data
+@ApiModel(description = "登录请求信息")
 public class UserLoginMsg {
 	@ApiModelProperty(value = "登录校验code", required = true)
 	private String code;

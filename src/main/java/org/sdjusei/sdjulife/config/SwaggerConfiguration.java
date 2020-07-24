@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * knife4j配置类
  *
- * @author zhaochenzhi
+ * @author zcz
  * @date 2020/07/13
  */
 @Configuration
@@ -26,7 +26,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
 	public static final String SWAGGER_SCAN_BASE_PACKAGE = "org.sdjusei.sdjulife.controller";
-	public static final String VERSION = "0.0.1";
+	public static final String VERSION = "0.0.2";
 
 	@Bean(value = "defaultApi2")
 	public Docket defaultApi2() {
