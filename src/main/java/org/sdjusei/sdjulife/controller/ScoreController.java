@@ -2,6 +2,7 @@ package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sdjusei.sdjulife.domain.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +22,13 @@ public class ScoreController {
 
 	@ApiOperation("成绩查询")
 	@GetMapping("/score")
-	public String listScore(){
-		return "";
+	public Result<Void> listScore() {
+		return Result.success();
 	}
 
 	@ApiOperation("绩点查询")
 	@PostMapping("/gpa")
-	public String getGpa(){
-		return "";
+	public Result<Void> getGpa() {
+		return Result.success();
 	}
 }

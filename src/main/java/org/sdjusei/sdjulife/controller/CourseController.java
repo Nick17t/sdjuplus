@@ -2,14 +2,13 @@ package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.sdjusei.sdjulife.domain.Course;
+import org.sdjusei.sdjulife.domain.Result;
 import org.sdjusei.sdjulife.service.CourseService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * 课程控制层
@@ -27,7 +26,7 @@ public class CourseController {
 
 	@ApiOperation("课表查询")
 	@PostMapping("/timetable")
-	public List<Course> list(String password) {
-		return courseService.getSchedule(password);
+	public Result<Void> list(String password) {
+		return Result.success();
 	}
 }

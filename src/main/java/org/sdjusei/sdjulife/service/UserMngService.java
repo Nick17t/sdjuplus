@@ -42,7 +42,7 @@ public class UserMngService {
 	 * 更新用户信息方法
 	 *
 	 * @param token 用户token
-	 * @param user 用户类对象
+	 * @param user  用户类对象
 	 */
 	public void updateInfo(String token, User user) {
 		Integer userId = TokenUtil.decodeJwtToken(token);

@@ -2,7 +2,6 @@ package org.sdjusei.sdjulife.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.sdjusei.sdjulife.domain.User;
 

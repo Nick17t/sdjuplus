@@ -25,8 +25,8 @@ public class TokenExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value = JWTCreationException.class)
-	public Result tokenCreateError(JWTCreationException jwtCreationException) {
-		return new Result(ResultEnum.TOKEN_CREATE_ERROR);
+	public Result<Void> tokenCreateError(JWTCreationException jwtCreationException) {
+		return Result.fail(ResultEnum.TOKEN_CREATE_ERROR);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class TokenExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value = JWTVerificationException.class)
-	public Result tokenVerificationError(JWTVerificationException jwtVerificationException) {
-		return new Result(ResultEnum.TOKEN_INVALID);
+	public Result<Void> tokenVerificationError(JWTVerificationException jwtVerificationException) {
+		return Result.fail(ResultEnum.TOKEN_INVALID);
 	}
 }

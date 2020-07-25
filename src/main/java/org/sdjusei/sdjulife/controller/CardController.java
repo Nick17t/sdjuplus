@@ -2,6 +2,7 @@ package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sdjusei.sdjulife.domain.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +21,13 @@ public class CardController {
 
 	@ApiOperation("余额查询")
 	@PostMapping("/balance")
-	public String getBalance() {
-		return "";
+	public Result<Void> getBalance() {
+		return Result.success();
 	}
 
 	@ApiOperation("交易信息查询")
 	@GetMapping("/transaction-record")
-	public String getRecord() {
-		return "";
+	public Result<Void> getRecord() {
+		return Result.success();
 	}
 }

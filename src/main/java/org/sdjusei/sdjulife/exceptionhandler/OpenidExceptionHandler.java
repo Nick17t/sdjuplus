@@ -25,7 +25,7 @@ public class OpenidExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value = SocketTimeoutException.class)
-	public Result timeoutError(SocketTimeoutException socketTimeoutException) {
-		return new Result(ResultEnum.OPENID_GET_TIMEOUT);
+	public Result<Void> timeoutError(SocketTimeoutException socketTimeoutException) {
+		return Result.fail(ResultEnum.OPENID_GET_TIMEOUT);
 	}
 }

@@ -17,7 +17,7 @@ public class CommonExceptionHandler {
 
 	@ResponseBody
 	@ExceptionHandler
-	public Result commonError(CommonException e) {
-		return new Result(e.getCode(), e.getMessage());
+	public Result<Void> commonError(CommonException e) {
+		return Result.fail(e.getCode(), e.getMessage());
 	}
 }

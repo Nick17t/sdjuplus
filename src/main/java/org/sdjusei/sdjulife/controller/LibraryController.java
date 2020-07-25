@@ -2,6 +2,7 @@ package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sdjusei.sdjulife.domain.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +21,13 @@ public class LibraryController {
 
 	@ApiOperation("书籍查询")
 	@GetMapping("/search")
-	public String search() {
-		return "";
+	public Result<Void> search() {
+		return Result.success();
 	}
 
 	@ApiOperation("借阅查询")
 	@GetMapping("/borrowed")
-	public String borrowed() {
-		return "";
+	public Result<Void> borrowed() {
+		return Result.success();
 	}
 }

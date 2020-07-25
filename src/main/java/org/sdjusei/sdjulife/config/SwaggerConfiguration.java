@@ -25,6 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
+
 	public static final String SWAGGER_SCAN_BASE_PACKAGE = "org.sdjusei.sdjulife.controller";
 	public static final String VERSION = "0.0.2";
 

@@ -2,6 +2,7 @@ package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sdjusei.sdjulife.domain.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,19 +21,19 @@ public class FeedbackController {
 
 	@ApiOperation("提交反馈")
 	@PostMapping("/submit")
-	public String submit() {
-		return "";
+	public Result<Void> submit() {
+		return Result.success();
 	}
 
 	@ApiOperation("查看反馈")
 	@PostMapping("/list")
-	public String list() {
-		return "";
+	public Result<Void> list() {
+		return Result.success();
 	}
 
 	@ApiOperation("删除反馈")
 	@GetMapping("/delete")
-	public String delete() {
-		return "";
+	public Result<Void> delete() {
+		return Result.success();
 	}
 }

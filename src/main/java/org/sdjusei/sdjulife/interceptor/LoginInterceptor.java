@@ -18,8 +18,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String token = request.getHeader("token");
 
-		//TODO 开发模式下，没有token也放行，上线后应改为抛出异常
-		if(token==null)
+		//TODO 开发模式下，没有token也放行，上线前应去除
+		if (token == null)
 			return true;
 
 		//如果验证失败会被异常处理器拦截处理

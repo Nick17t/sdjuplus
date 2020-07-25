@@ -22,17 +22,18 @@ public class OtherExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(RuntimeException.class)
-	public Result runtimeException(RuntimeException runtimeException){
-		return new Result(ResultEnum.SERVER_ERROR);
+	public Result<Void> runtimeException(RuntimeException runtimeException) {
+		return Result.fail(ResultEnum.SERVER_ERROR);
 	}
 
 	/**
 	 * 通用其他异常处理方法
+	 *
 	 * @return 返回未知错误的错误码和错误信息
 	 */
 	@ResponseBody
 	@ExceptionHandler(Exception.class)
-	public Result otherException(Exception e){
-		return new Result(ResultEnum.UNKNOWN_ERROR);
+	public Result<Void> otherException(Exception e) {
+		return Result.fail(ResultEnum.UNKNOWN_ERROR);
 	}
 }

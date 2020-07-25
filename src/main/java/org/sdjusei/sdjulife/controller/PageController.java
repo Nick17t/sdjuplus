@@ -2,6 +2,7 @@ package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sdjusei.sdjulife.domain.Result;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +21,13 @@ public class PageController {
 
 	@ApiOperation("设置首页按钮")
 	@PostMapping("/set-btn")
-	public String setButton() {
-		return "";
+	public Result<Void> setButton() {
+		return Result.success();
 	}
 
 	@ApiOperation("设置首页背景图")
 	@PostMapping("/set-pic")
-	public String setBackPicture() {
-		return "";
+	public Result<Void> setBackPicture() {
+		return Result.success();
 	}
 }

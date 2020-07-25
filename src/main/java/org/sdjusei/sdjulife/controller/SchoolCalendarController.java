@@ -2,6 +2,7 @@ package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sdjusei.sdjulife.domain.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,26 +22,26 @@ public class SchoolCalendarController {
 
 	@ApiOperation("事件查询")
 	@GetMapping("/list")
-	public String list() {
-		return "";
+	public Result<Void> list() {
+		return Result.success();
 	}
 
 	@ApiOperation("增加事件")
 	@PostMapping("/add")
-	public String add() {
-		return "";
+	public Result<Void> add() {
+		return Result.success();
 	}
 
 	@ApiOperation("修改事件")
 	@PostMapping("/update")
-	public String update() {
-		return "";
+	public Result<Void> update() {
+		return Result.success();
 	}
 
 	@ApiOperation("删除事件")
 	@PostMapping("/delete")
-	public String delete() {
-		return "";
+	public Result<Void> delete() {
+		return Result.success();
 	}
 
 }
