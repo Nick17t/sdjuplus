@@ -1,7 +1,7 @@
 package org.sdjusei.sdjulife;
 
 import org.junit.jupiter.api.Test;
-import org.sdjusei.sdjulife.domain.UserLoginMsg;
+import org.sdjusei.sdjulife.util.SchoolSysAccessUtil;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -14,13 +14,15 @@ class SdjulifeApplicationTests {
 //	private MockMvc mockMvc;
 
 	@Resource
-	public UserLoginMsg userLoginMsg;
+	public SchoolSysAccessUtil schoolSysAccessUtil;
 
 	@Test
-	void contextLoads() {
-		userLoginMsg.setCode("123");
-		userLoginMsg.setPlatform("wx");
-		System.out.println(userLoginMsg);
+	void contextLoads() throws Exception {
+//		Map<String, String> map = schoolSysAccessUtil.unifiedLogin();
+//		System.out.println(map);
+//		map = schoolSysAccessUtil.emsLogin(map);
+//		System.out.println(map);
+//		System.out.println(schoolSysAccessUtil.getCourseListString(map));
 	}
 
 }

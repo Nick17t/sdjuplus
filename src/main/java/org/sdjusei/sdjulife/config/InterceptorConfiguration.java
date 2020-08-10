@@ -1,9 +1,12 @@
 package org.sdjusei.sdjulife.config;
 
-import org.sdjusei.sdjulife.interceptor.LoginInterceptor;
+import org.sdjusei.sdjulife.interceptor.UnifiedSysInterceptor;
+import org.sdjusei.sdjulife.interceptor.UserLoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.annotation.Resource;
 
 /**
  * 拦截器配置文件
@@ -14,11 +17,24 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
 
+	@Resource
+	private UserLoginInterceptor userLoginInterceptor;
+	@Resource
+	private UnifiedSysInterceptor unifiedSysInterceptor;
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		//登录拦截器
-		registry.addInterceptor(new LoginInterceptor())
+		//小程序登录拦截器
+		registry.addInterceptor(userLoginInterceptor)
 				.addPathPatterns("/**")
 				.excludePathPatterns("/**/login");
+		//统一认证系统登录拦截器
+		registry.addInterceptor(unifiedSysInterceptor)
+				.addPathPatterns("/card/**")
+				.addPathPatterns("/course/**")
+				.addPathPatterns("/exam/**")
+				.addPathPatterns("/library/**")
+				.addPathPatterns("/calendar/**")
+				.addPathPatterns("/score/**");
 	}
 }

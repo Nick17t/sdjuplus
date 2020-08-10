@@ -4,7 +4,6 @@ import org.sdjusei.sdjulife.dao.UserDao;
 import org.sdjusei.sdjulife.domain.Code2SessionResult;
 import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.domain.User;
-import org.sdjusei.sdjulife.domain.UserLoginMsg;
 import org.sdjusei.sdjulife.exception.CommonException;
 import org.sdjusei.sdjulife.util.OpenidUtil;
 import org.sdjusei.sdjulife.util.TokenUtil;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 /**
  * 用户登录服务，用于处理用户的登录过程
@@ -36,14 +34,19 @@ public class UserLoginService {
 	 * @return 登录成功时，返回Token
 	 * @throws Exception openid获取和token创建时的异常
 	 */
-	public String login(UserLoginMsg userLoginMsg) throws IOException {
-		//使用传来的code向相应平台的API请求openid和session_key，存入对应的实体类中
-		Code2SessionResult code2SessionResult = openidUtil.jscode2Session(userLoginMsg.getCode(), userLoginMsg.getPlatform());
+	public String login(String code, String platform) throws Exception {
+		//如果缺失字段则返回错误信息
+		if (code == null || platform == null || "".equals(code) || "".equals(platform)) {
+			throw new CommonException(ResultEnum.MINI_PRO_LOGIN_INFO_MISSING);
+		}
+
+		//从腾讯服务器获取openid
+		Code2SessionResult code2SessionResult = openidUtil.jsCode2Session(code, platform);
 
 		//检查用户是否存在，不存在则进行“注册”，无论是否存在，最后都要通过userId生成Token返回给前端
 		User user = userDao.searchUserByOpenid(code2SessionResult.getOpenId());
 		if (user == null) {
-			user = register(code2SessionResult.getOpenId(), userLoginMsg.getPlatform());
+			user = register(code2SessionResult.getOpenId(), platform);
 		}
 		return TokenUtil.createJwtToken(user.getUserId().toString());
 	}

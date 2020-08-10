@@ -4,14 +4,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.sdjusei.sdjulife.domain.Result;
 import org.sdjusei.sdjulife.domain.User;
-import org.sdjusei.sdjulife.domain.UserLoginMsg;
 import org.sdjusei.sdjulife.service.UserLoginService;
 import org.sdjusei.sdjulife.service.UserMngService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 小程序用户控制层，
@@ -37,13 +37,15 @@ public class UserController {
 	 *
 	 * @param userLoginMsg 登录信息，包含小程序给的code和平台标记
 	 * @return 返回成功信息和token
-	 * @throws IOException 包含token创建失败、获取openid失败等，统一由异常处理器处理
+	 * @throws Exception 包含token创建失败、获取openid失败等，统一由异常处理器处理
 	 */
 	@ApiOperation("登录")
 	@PostMapping("/login")
-	public Result<String> login(@RequestBody UserLoginMsg userLoginMsg) throws IOException {
-		String token = userLoginService.login(userLoginMsg);
-		return Result.success(token);
+	public Result<Map<String, String>> login(@RequestBody String code) throws Exception {
+		String token = userLoginService.login(code, request.getHeader("platform"));
+		Map<String, String> data = new HashMap<>();
+		data.put("token", token);
+		return Result.success(data);
 	}
 
 	/**

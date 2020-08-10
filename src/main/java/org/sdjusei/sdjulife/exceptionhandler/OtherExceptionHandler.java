@@ -2,17 +2,16 @@ package org.sdjusei.sdjulife.exceptionhandler;
 
 import org.sdjusei.sdjulife.domain.Result;
 import org.sdjusei.sdjulife.domain.ResultEnum;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 通用异常处理类
+ * 通用异常处理类(兜底处理类，处理其他Handler无法拦截的异常)
  *
  * @author zcz
  * @date 2020/07/23
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class OtherExceptionHandler {
 
 	/**
@@ -20,7 +19,6 @@ public class OtherExceptionHandler {
 	 *
 	 * @return 返回服务端错误的错误码和错误信息
 	 */
-	@ResponseBody
 	@ExceptionHandler(RuntimeException.class)
 	public Result<Void> runtimeException(RuntimeException runtimeException) {
 		return Result.fail(ResultEnum.SERVER_ERROR);
@@ -31,7 +29,6 @@ public class OtherExceptionHandler {
 	 *
 	 * @return 返回未知错误的错误码和错误信息
 	 */
-	@ResponseBody
 	@ExceptionHandler(Exception.class)
 	public Result<Void> otherException(Exception e) {
 		return Result.fail(ResultEnum.UNKNOWN_ERROR);

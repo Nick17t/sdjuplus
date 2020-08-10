@@ -46,11 +46,11 @@ public class OpenidUtil {
 	 * @return 以字符串形式返回API返回的JSON对象
 	 * @throws SocketTimeoutException       请求超时
 	 * @throws UnsupportedMimeTypeException 不知道是啥异常
-	 * @throws HttpStatusException          不知道是啥异常
+	 * @throws HttpStatusException          HTTP状态码异常（不是200）
 	 * @throws CommonException              自定义异常
 	 */
-	public Code2SessionResult jscode2Session(String code, String platform) throws IOException {
-		String openIdUrl = null, appId = null, secret = null;
+	public Code2SessionResult jsCode2Session(String code, String platform) throws IOException {
+		String openIdUrl, appId, secret;
 
 		//判断请求的平台
 		if ("wx".equalsIgnoreCase(platform)) {

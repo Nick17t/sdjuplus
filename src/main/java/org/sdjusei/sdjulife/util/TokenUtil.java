@@ -3,7 +3,6 @@ package org.sdjusei.sdjulife.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.*;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +26,7 @@ public class TokenUtil {
 	private static final String ISSUER = "SDJUSEI";
 	private static long EXPIRE_TIME;
 
-	@Value("${token.expire.time}")
+	@Value("${token.expireTime}")
 	public static void setExpireTime(long expireTime) {
 		EXPIRE_TIME = expireTime;
 	}
@@ -59,7 +58,7 @@ public class TokenUtil {
 	 * @throws InvalidClaimException          claim中的信息无效
 	 */
 	public static void verifyJwtToken(String token) {
-		DecodedJWT jwt = JWT.require(Algorithm.HMAC256(SECRET))
+		JWT.require(Algorithm.HMAC256(SECRET))
 				.withIssuer(ISSUER)
 				.build()
 				.verify(token);
