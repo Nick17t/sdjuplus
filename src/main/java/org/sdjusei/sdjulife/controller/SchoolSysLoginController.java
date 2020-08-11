@@ -30,7 +30,7 @@ public class SchoolSysLoginController {
 	 * 统一认证系统登录接口，前端应将返回的Cookie保存，后续请求时放在header中
 	 *
 	 * @param map 第一次只带学号请求，第二次带有学号和加密后的密码（可能还有验证码）以及其他暂存的参数
-	 * @return 第一次返回验证码标记、暂存参数和加密用的盐，第二次返回登录后的Cookie
+	 * @return 第一次返回验证码、暂存参数和加密用的盐，第二次返回登录后的Cookie
 	 */
 	@ApiOperation("统一认证系统登录方法")
 	@PostMapping("/unified-sys")

@@ -1,7 +1,7 @@
 package org.sdjusei.sdjulife;
 
 import org.junit.jupiter.api.Test;
-import org.sdjusei.sdjulife.util.SchoolSysAccessUtil;
+import org.sdjusei.sdjulife.util.JsoupUtil;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -14,7 +14,7 @@ class SdjulifeApplicationTests {
 //	private MockMvc mockMvc;
 
 	@Resource
-	public SchoolSysAccessUtil schoolSysAccessUtil;
+	public JsoupUtil jsoupUtil;
 
 	@Test
 	void contextLoads() throws Exception {

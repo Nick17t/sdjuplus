@@ -27,8 +27,7 @@ public class PasswordUtil {
 		SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), "AES");
 		cipher.init(Cipher.ENCRYPT_MODE, skeySpec, new IvParameterSpec(iv.getBytes()));
 		byte[] encrypted = cipher.doFinal(data.getBytes());
-		String s = Base64.getEncoder().encodeToString(encrypted);
-		return s;
+		return Base64.getEncoder().encodeToString(encrypted);
 	}
 
 	private static String randomString(int len) {

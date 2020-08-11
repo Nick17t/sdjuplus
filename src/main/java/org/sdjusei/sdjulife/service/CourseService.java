@@ -1,7 +1,7 @@
 package org.sdjusei.sdjulife.service;
 
 import org.sdjusei.sdjulife.domain.Course;
-import org.sdjusei.sdjulife.util.SchoolSysAccessUtil;
+import org.sdjusei.sdjulife.util.JsoupUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,7 +18,7 @@ import java.util.List;
 public class CourseService {
 
 	@Resource
-	private SchoolSysAccessUtil schoolSysAccessUtil;
+	private JsoupUtil jsoupUtil;
 
 	public List<Course> getSchedule(String password) {
 		List<Course> courseList = new ArrayList<>();
