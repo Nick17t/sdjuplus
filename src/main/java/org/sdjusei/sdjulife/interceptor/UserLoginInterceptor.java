@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +19,14 @@ import javax.servlet.http.HttpServletResponse;
 public class UserLoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		String token = request.getHeader("token");
+		Cookie[] cookies = request.getCookies();
+		String token = null;
+		for (Cookie c : cookies) {
+			if ("Token".equalsIgnoreCase(c.getName())) {
+				token = c.getValue();
+				break;
+			}
+		}
 
 		//TODO 开发模式下，没有token也放行，上线前应去除
 		if (token == null)

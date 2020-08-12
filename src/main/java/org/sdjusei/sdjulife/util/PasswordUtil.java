@@ -1,5 +1,7 @@
 package org.sdjusei.sdjulife.util;
 
+import org.springframework.stereotype.Component;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -12,6 +14,7 @@ import java.util.Base64;
  * @date 2020/08/06
  * @deprecated 建议仅测试使用，加密应在前端完成
  */
+@Component
 public class PasswordUtil {
 	private static final String $aes_chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
 

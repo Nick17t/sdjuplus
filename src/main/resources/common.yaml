@@ -1,0 +1,27 @@
+qq:
+  app:
+    id:
+    secret:
+  openidUrl: https://api.q.qq.com/sns/jscode2session
+
+wx:
+  app:
+    id:
+    secret:
+  openidUrl: https://api.weixin.qq.com/sns/jscode2session
+
+ems:
+  url: https://xjwgl.sdju.edu.cn/
+  loginUrl: sso/jziotlogin
+  courseListRequestUrl: jwglxt/kbcx/xskbcx_cxXsKb.html
+  scoreRequestUrl: jwglxt/cjcx/cjcx_cxDgXscj.html
+  examRequestUrl: jwglxt/kwgl/kscx_cxXsksxxIndex.html
+
+unifiedSys:
+  loginUrl: https://authserver.sdju.edu.cn/authserver/login
+  captchaNeededCheckUrl: https://authserver.sdju.edu.cn/authserver/needCaptcha.html
+  captchaGetUrl: https://authserver.sdju.edu.cn/authserver/captcha.html
+  ehallUrl: https://ehall.sdju.edu.cn/
+
+token:
+  expireTime: 259200000

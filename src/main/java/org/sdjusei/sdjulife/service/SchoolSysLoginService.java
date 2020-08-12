@@ -1,17 +1,15 @@
 package org.sdjusei.sdjulife.service;
 
 import org.jsoup.Connection;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.exception.CommonException;
-import org.sdjusei.sdjulife.util.JsoupUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -33,8 +31,6 @@ public class SchoolSysLoginService {
 	private String captchaNeededCheckUrl;
 	@Value("${unifiedSys.captchaGetUrl}")
 	private String captchaGetUrl;
-	@Resource
-	private JsoupUtil jsoupUtil;
 
 	/**
 	 * 统一认证系统登录方法
@@ -45,7 +41,7 @@ public class SchoolSysLoginService {
 	 */
 	public Map<String, String> unifiedLogin(Map<String, String> map) throws Exception {
 		//无法获得学号则抛出异常
-		if (map.get("stuId") == null)
+		if (map.get("username") == null)
 			throw new CommonException(ResultEnum.STU_ID_MISSING);
 		//如果需要验证码却没有输入，抛出异常
 		if (map.get("captchaImage") != null && map.get("captchaResponse") == null)
@@ -72,23 +68,20 @@ public class SchoolSysLoginService {
 		Document loginPage = response.parse();
 		//获取盐
 		String aseKey = loginPage.select("script").get(1).html().split(";")[1].split("=")[1].replaceAll("\"", "").replaceAll(" ", "");
-		//获取lt
+		//获取lt，经验证为必需参数
 		String lt = loginPage.select("input").get(4).attributes().get("value");
-		//获取execution
+		//获取execution，经验证为必需参数
 		String execution = loginPage.select("input").get(6).attributes().get("value");
 
 		dataMap.put("aseKey", aseKey);
 		dataMap.put("lt", lt);
 		dataMap.put("execution", execution);
-		dataMap.put("unifiedSys_jsessionid", response.cookies().get("JSESSIONID"));
-		dataMap.put("route", response.cookies().get("route"));
+		dataMap.put("JSESSIONID", response.cookies().get("JSESSIONID"));
 
 		//检查是否需要验证码
 		String verifyMark = Jsoup.connect(captchaNeededCheckUrl)
-				.data("username", dataMap.get("stuId"))
+				.data("username", dataMap.get("username"))
 				.cookie("JSESSIONID", response.cookies().get("JSESSIONID"))
-				.cookie("route", response.cookies().get("route"))
-				.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh_CN")
 				.method(Connection.Method.GET)
 				.execute()
 				.body();
@@ -98,8 +91,6 @@ public class SchoolSysLoginService {
 		if ("true".equalsIgnoreCase(verifyMark)) {
 			byte[] bytes = Jsoup.connect(captchaGetUrl)
 					.cookie("JSESSIONID", response.cookies().get("JSESSIONID"))
-					.cookie("route", response.cookies().get("route"))
-					.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh_CN")
 					.execute()
 					.bodyAsBytes();
 			Base64.Encoder encoder = Base64.getEncoder();
@@ -116,21 +107,23 @@ public class SchoolSysLoginService {
 	 * @throws Exception 所有Jsoup连接过程中的异常
 	 */
 	public Map<String, String> postUnifiedLogin(Map<String, String> dataMap) throws Exception {
-		//固有登录参数，无需改动，默认开启一周免登录
+		//开启一周免登录
 		dataMap.put("rememberMe", "on");
-		dataMap.put("dllt", "userNamePasswordLogin");
+		//经验证为必需参数，无需改动
 		dataMap.put("_eventId", "submit");
-		dataMap.put("rmShown", "1");
 
 		Connection.Response response = Jsoup.connect(unifiedSysLoginUrl)
 				.data(dataMap)
-				.cookie("JSESSIONID", dataMap.get("unifiedSys_jsessionid"))
-				.cookie("route", dataMap.get("route"))
-				.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh_CN")
+				.cookie("JSESSIONID", dataMap.get("JSESSIONID"))
 				.method(Connection.Method.POST)
 				.execute();
 		if (response.cookies().get("iPlanetDirectoryPro") == null)
-			throw new CommonException(ResultEnum.SCHOOL_SYS_LOGIN_INFO_ERROR);
-		return response.cookies();
+			throw new CommonException(ResultEnum.SCHOOL_SYS_LOGIN_FAIL);
+
+		//整理cookies，仅保留有效信息传回前端
+		Map<String, String> cookies = new HashMap<>();
+		cookies.put("iPlanetDirectoryPro",response.cookie("iPlanetDirectoryPro"));
+		cookies.put("CASTGC",response.cookie("CASTGC"));
+		return cookies;
 	}
 }

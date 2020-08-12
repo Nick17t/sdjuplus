@@ -9,8 +9,8 @@ import org.sdjusei.sdjulife.service.UserMngService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -30,22 +30,22 @@ public class UserController {
 	@Resource
 	private UserMngService userMngService;
 	@Resource
-	private HttpServletRequest request;
+	private HttpServletResponse response;
 
 	/**
 	 * 登录Controller方法
 	 *
-	 * @param userLoginMsg 登录信息，包含小程序给的code和平台标记
+	 * @param code 小程序给的code
 	 * @return 返回成功信息和token
 	 * @throws Exception 包含token创建失败、获取openid失败等，统一由异常处理器处理
 	 */
 	@ApiOperation("登录")
 	@PostMapping("/login")
-	public Result<Map<String, String>> login(@RequestBody String code) throws Exception {
-		String token = userLoginService.login(code, request.getHeader("platform"));
-		Map<String, String> data = new HashMap<>();
-		data.put("token", token);
-		return Result.success(data);
+	public Result<Void> login(@RequestBody String code,
+	                          @RequestBody String platform) throws Exception {
+		String token = userLoginService.login(code, platform);
+		response.addCookie(new Cookie("Token", token));
+		return Result.success();
 	}
 
 	/**
@@ -55,8 +55,8 @@ public class UserController {
 	 */
 	@ApiOperation("修改信息")
 	@PostMapping("/update")
-	public Result<Void> updateInfo(@RequestBody User user) {
-		String token = request.getHeader("token");
+	public Result<Void> updateInfo(@CookieValue("Token") String token,
+	                               @RequestBody User user) {
 		userMngService.updateInfo(token, user);
 		return Result.success();
 	}
@@ -68,8 +68,7 @@ public class UserController {
 	 */
 	@ApiOperation("注销")
 	@PostMapping("/logoff")
-	public Result<Void> logoff() {
-		String token = request.getHeader("token");
+	public Result<Void> logoff(@CookieValue("Token") String token) {
 		userMngService.delete(token);
 		return Result.success();
 	}
