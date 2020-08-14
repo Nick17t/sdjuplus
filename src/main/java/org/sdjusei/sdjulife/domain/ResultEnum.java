@@ -21,13 +21,13 @@ public enum ResultEnum {
 	SUCCESS("000000", "请求成功"),
 
 	USER_ERROR("A00001", "用户端错误"),
-	MINI_PRO_LOGIN_INFO_ERROR("A00100","登录信息错误"),
-	MINI_PRO_LOGIN_INFO_MISSING("A00101","登录信息缺失"),
+	MINI_PRO_LOGIN_INFO_ERROR("A00100", "登录信息错误"),
+	MINI_PRO_LOGIN_INFO_MISSING("A00101", "登录信息缺失"),
 	TOKEN_INVALID("A00200", "token无效"),
-	SCHOOL_SYS_NOT_LOGIN("A00210","未登录统一认证系统"),
-	SCHOOL_SYS_LOGIN_FAIL("A00300","统一认证系统登录失败"),
-	STU_ID_MISSING("A00301","学号为空"),
-	CAPTCHA_CODE_MISSING("A00302","验证码为空"),
+	SCHOOL_SYS_NOT_LOGIN("A00210", "未登录统一认证系统"),
+	SCHOOL_SYS_LOGIN_FAIL("A00300", "统一认证系统登录失败"),
+	STU_ID_MISSING("A00301", "学号为空"),
+	CAPTCHA_CODE_MISSING("A00302", "验证码为空"),
 
 	SERVER_ERROR("B00001", "服务端错误"),
 	TOKEN_CREATE_ERROR("B00010", "token创建失败"),
@@ -45,7 +45,9 @@ public enum ResultEnum {
 	SCHOOL_SYS_REQUEST_ERROR("COO200", "学校系统请求出错"),
 	SCHOOL_SYS_ACCESS_FAILED("C00210", "学校系统连接失败"),
 	SCHOOL_SYS_LOGIN_TIMEOUT("C00211", "学校系统登录超时"),
-	EMS_COURSE_GET_FAIL("C00212","课表获取失败");
+	EMS_COURSE_GET_FAIL("C00212", "课表获取失败"),
+	EMS_SCORE_GET_FAIL("C00213", "成绩获取失败"),
+	EMS_EXAM_GET_FAIL("C00214", "考试信息获取失败");
 
 	private final String code;
 	private final String message;

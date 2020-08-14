@@ -1,12 +1,5 @@
 package org.sdjusei.sdjulife.util;
 
-import org.jsoup.Connection;
-import org.jsoup.HttpStatusException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.sdjusei.sdjulife.domain.ResultEnum;
-import org.sdjusei.sdjulife.exception.CommonException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -17,8 +10,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.Base64;
-import java.util.Map;
 
 /**
  * Jsoup工具类

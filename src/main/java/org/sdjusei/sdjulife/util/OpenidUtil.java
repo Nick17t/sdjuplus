@@ -1,6 +1,6 @@
 package org.sdjusei.sdjulife.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
@@ -11,7 +11,6 @@ import org.sdjusei.sdjulife.exception.CommonException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
@@ -32,11 +31,6 @@ public class OpenidUtil {
 	private static String QQ_OPENID_URL;
 	private static String QQ_APP_ID;
 	private static String QQ_SECRET;
-	/**
-	 * Jackson的转换类
-	 */
-	@Resource
-	private ObjectMapper objectMapper;
 
 	/**
 	 * 用腾讯提供的API换取openid和session_key
@@ -75,7 +69,7 @@ public class OpenidUtil {
 				.data(parameterMap)
 				.method(Connection.Method.GET)
 				.execute();
-		Code2SessionResult code2SessionResult = objectMapper.readValue(response.body(), Code2SessionResult.class);
+		Code2SessionResult code2SessionResult = new Gson().fromJson(response.body(), Code2SessionResult.class);
 
 		//根据返回的errCode，抛出异常，进行统一处理
 		if ("-1".equals(code2SessionResult.getErrCode())) {

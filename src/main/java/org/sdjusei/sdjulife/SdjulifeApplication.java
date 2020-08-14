@@ -3,9 +3,9 @@ package org.sdjusei.sdjulife;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 
-@SpringBootApplication()
+@SpringBootApplication(exclude = {JacksonAutoConfiguration.class})
 @MapperScan("org.sdjusei.sdjulife.dao")
 public class SdjulifeApplication {
 

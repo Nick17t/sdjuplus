@@ -1,6 +1,5 @@
 package org.sdjusei.sdjulife.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +12,6 @@ import lombok.Data;
  */
 @Data
 @ApiModel(description = "学生用户")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 	@ApiModelProperty(hidden = true)
 	private Integer userId;

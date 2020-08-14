@@ -3,10 +3,14 @@ package org.sdjusei.sdjulife.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.sdjusei.sdjulife.domain.Result;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.sdjusei.sdjulife.domain.Score;
+import org.sdjusei.sdjulife.service.ScoreService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 成绩查询控制层
@@ -20,15 +24,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/score")
 public class ScoreController {
 
+	@Resource
+	private ScoreService scoreService;
+
+	/**
+	 * 成绩查询方法
+	 *
+	 * @param iPlanetDirectoryPro 统一认证Cookie，放在请求头的Cookie中传入
+	 * @param CASTGC              统一认证Cookie，放在请求头的Cookie中传入
+	 * @param year                学年
+	 * @param term                学期
+	 * @return 返回成绩Json
+	 * @throws Exception Jsoup的所有异常
+	 */
 	@ApiOperation("成绩查询")
 	@GetMapping("/score")
-	public Result<Void> listScore() {
-		return Result.success();
-	}
-
-	@ApiOperation("绩点查询")
-	@PostMapping("/gpa")
-	public Result<Void> getGpa() {
-		return Result.success();
+	public Result<List<Score>> listScore(@CookieValue("iPlanetDirectoryPro") String iPlanetDirectoryPro,
+	                                     @CookieValue("CASTGC") String CASTGC,
+	                                     @RequestParam("year") String year,
+	                                     @RequestParam("term") String term) throws Exception {
+		Map<String, String> cookies = new HashMap<>();
+		cookies.put("iPlanetDirectoryPro", iPlanetDirectoryPro);
+		cookies.put("CASTGC", CASTGC);
+		List<Score> scoreList = scoreService.getScoreList(cookies, year, term);
+		return Result.success(scoreList);
 	}
 }

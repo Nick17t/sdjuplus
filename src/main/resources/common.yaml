@@ -14,7 +14,7 @@ ems:
   url: https://xjwgl.sdju.edu.cn/
   loginUrl: sso/jziotlogin
   courseListRequestUrl: jwglxt/kbcx/xskbcx_cxXsKb.html
-  scoreRequestUrl: jwglxt/cjcx/cjcx_cxDgXscj.html
+  scoreRequestUrl: jwglxt/cjcx/cjcx_cxDgXscj.html?doType=query
   examRequestUrl: jwglxt/kwgl/kscx_cxXsksxxIndex.html
 
 unifiedSys:

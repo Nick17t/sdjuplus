@@ -10,7 +10,6 @@ import lombok.Data;
  * @date 2020/07/18
  */
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Code2SessionResult {
 	private String openId;
 	private String sessionKey;

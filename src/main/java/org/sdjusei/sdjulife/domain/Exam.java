@@ -1,7 +1,6 @@
 package org.sdjusei.sdjulife.domain;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -11,22 +10,21 @@ import lombok.Data;
  * @date 2020/07/16
  */
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Exam {
-	@JsonAlias("xf")
+	@SerializedName("xf")
 	private Double credit;      //学分
-	@JsonAlias("kch")
+	@SerializedName("kch")
 	private String courseId;    //课程号
-	@JsonAlias("kcmc")
+	@SerializedName("kcmc")
 	private String courseName;  //课程名称
-	@JsonAlias("xh")
+	@SerializedName("xh")
 	private String stuId;       //学号
-	@JsonAlias("xnm")
+	@SerializedName("xnm")
 	private String year;        //学年名
-	@JsonAlias("xq")
+	@SerializedName("xq")
 	private String semester;    //学期
-	@JsonAlias("cdmc")
+	@SerializedName("cdmc")
 	private String examPosition;//考试地点
-	@JsonAlias("kssj")
+	@SerializedName("kssj")
 	private String examTime;    //考试时间
 }
