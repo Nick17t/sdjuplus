@@ -15,13 +15,16 @@ ems:
   loginUrl: sso/jziotlogin
   courseListRequestUrl: jwglxt/kbcx/xskbcx_cxXsKb.html
   scoreRequestUrl: jwglxt/cjcx/cjcx_cxDgXscj.html?doType=query
-  examRequestUrl: jwglxt/kwgl/kscx_cxXsksxxIndex.html
+  examRequestUrl: jwglxt/kwgl/kscx_cxXsksxxIndex.html?doType=query
 
 unifiedSys:
   loginUrl: https://authserver.sdju.edu.cn/authserver/login
   captchaNeededCheckUrl: https://authserver.sdju.edu.cn/authserver/needCaptcha.html
   captchaGetUrl: https://authserver.sdju.edu.cn/authserver/captcha.html
   ehallUrl: https://ehall.sdju.edu.cn/
+
+cardSys:
+  homePageUrl: https://card.sdju.edu.cn/epay/myepay/index
 
 token:
   expireTime: 259200000

@@ -1,8 +1,6 @@
 package org.sdjusei.sdjulife.controller;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.sdjusei.sdjulife.domain.Course;
 import org.sdjusei.sdjulife.domain.Result;
@@ -32,9 +30,9 @@ public class CourseController {
 	 * 课表查询方法
 	 *
 	 * @param iPlanetDirectoryPro 统一认证Cookie，放在请求头的Cookie中传入
-	 * @param CASTGC 统一认证Cookie，放在请求头的Cookie中传入
-	 * @param year 学年
-	 * @param term 学期
+	 * @param CASTGC              统一认证Cookie，放在请求头的Cookie中传入
+	 * @param year                学年
+	 * @param term                学期
 	 * @return 返回课表Json
 	 * @throws Exception Jsoup的所有异常
 	 */

@@ -1,15 +1,6 @@
 package org.sdjusei.sdjulife.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.junit.Test;
-import org.sdjusei.sdjulife.domain.Course;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
 
 /**
  * 课程工具类，获取课表

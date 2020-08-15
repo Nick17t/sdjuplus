@@ -7,7 +7,6 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.sdjusei.sdjulife.domain.Course;
 import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.domain.Score;
 import org.sdjusei.sdjulife.exception.CommonException;

@@ -2,7 +2,6 @@ package org.sdjusei.sdjulife.domain;
 
 import lombok.Data;
 
-
 /**
  * 管理用户实体类
  *

@@ -1,6 +1,5 @@
 package org.sdjusei.sdjulife.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 /**

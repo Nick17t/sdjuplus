@@ -122,8 +122,8 @@ public class SchoolSysLoginService {
 
 		//整理cookies，仅保留有效信息传回前端
 		Map<String, String> cookies = new HashMap<>();
-		cookies.put("iPlanetDirectoryPro",response.cookie("iPlanetDirectoryPro"));
-		cookies.put("CASTGC",response.cookie("CASTGC"));
+		cookies.put("iPlanetDirectoryPro", response.cookie("iPlanetDirectoryPro"));
+		cookies.put("CASTGC", response.cookie("CASTGC"));
 		return cookies;
 	}
 }

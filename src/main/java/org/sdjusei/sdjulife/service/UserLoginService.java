@@ -30,7 +30,7 @@ public class UserLoginService {
 	/**
 	 * 登录
 	 *
-	 * @param code 小程序发放的一次性登录用code
+	 * @param code     小程序发放的一次性登录用code
 	 * @param platform 平台标记，用于区分QQ和微信
 	 * @return 登录成功时，返回Token
 	 * @throws Exception openid获取和token创建时的异常
