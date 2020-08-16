@@ -10,6 +10,10 @@ wx:
     secret:
   openidUrl: https://api.weixin.qq.com/sns/jscode2session
 
+homepage:
+  xwNoticeUrl: https://www.sdju.edu.cn/xw_3101/list.htm
+  jxNoticeUrl: https://www.sdju.edu.cn/jx_3102/list.htm
+
 ems:
   url: https://xjwgl.sdju.edu.cn/
   loginUrl: sso/jziotlogin

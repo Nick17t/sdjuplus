@@ -1,7 +1,7 @@
 package org.sdjusei.sdjulife.exception;
 
 import lombok.Getter;
-import org.sdjusei.sdjulife.domain.ResultEnum;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
 
 /**
  * 通用异常类

@@ -1,9 +1,9 @@
 package org.sdjusei.sdjulife.service;
 
 import org.sdjusei.sdjulife.dao.UserDao;
-import org.sdjusei.sdjulife.domain.ResultEnum;
-import org.sdjusei.sdjulife.domain.User;
 import org.sdjusei.sdjulife.exception.CommonException;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
+import org.sdjusei.sdjulife.model.domain.User;
 import org.sdjusei.sdjulife.util.TokenUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

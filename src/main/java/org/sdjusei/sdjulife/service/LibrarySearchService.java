@@ -9,10 +9,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.sdjusei.sdjulife.domain.Book;
-import org.sdjusei.sdjulife.domain.BookLocation;
-import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.exception.CommonException;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
+import org.sdjusei.sdjulife.model.response.Book;
+import org.sdjusei.sdjulife.model.response.BookLocation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

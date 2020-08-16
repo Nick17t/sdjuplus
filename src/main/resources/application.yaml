@@ -11,6 +11,6 @@ spring:
 #    add-mappings: true
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: org.sdjusei.sdjulife.domain
+  type-aliases-package: org.sdjusei.sdjulife.model.domain
   configuration:
     map-underscore-to-camel-case: true

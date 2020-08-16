@@ -1,8 +1,8 @@
 package org.sdjusei.sdjulife.interceptor;
 
 import org.jsoup.Jsoup;
-import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.exception.CommonException;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

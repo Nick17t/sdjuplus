@@ -3,7 +3,7 @@ package org.sdjusei.sdjulife.service;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.sdjusei.sdjulife.domain.BookBorrowRecord;
+import org.sdjusei.sdjulife.model.response.BookBorrowRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,13 @@ public class BookBorrowRecordService {
 	@Value("${librarySys.borrowRecordUrl}")
 	private String borrowRecordUrl;
 
+	/**
+	 * 获取借阅记录方法
+	 *
+	 * @param cookies 统一认证系统Cookie
+	 * @return 借阅记录实体类List
+	 * @throws Exception 所有Jsoup的异常
+	 */
 	public List<BookBorrowRecord> getBorrowRecord(Map<String, String> cookies) throws Exception {
 		//通过统一认证系统来登录借阅系统
 		Elements elements = Jsoup.connect(borrowRecordUrl)

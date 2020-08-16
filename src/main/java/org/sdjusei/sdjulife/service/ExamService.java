@@ -7,9 +7,9 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.sdjusei.sdjulife.domain.Exam;
-import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.exception.CommonException;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
+import org.sdjusei.sdjulife.model.response.Exam;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

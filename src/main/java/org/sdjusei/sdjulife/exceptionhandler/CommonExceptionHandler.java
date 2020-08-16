@@ -1,7 +1,7 @@
 package org.sdjusei.sdjulife.exceptionhandler;
 
-import org.sdjusei.sdjulife.domain.Result;
 import org.sdjusei.sdjulife.exception.CommonException;
+import org.sdjusei.sdjulife.model.domain.Result;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

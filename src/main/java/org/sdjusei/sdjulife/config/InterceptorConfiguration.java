@@ -33,7 +33,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 				.addPathPatterns("/card/**")
 				.addPathPatterns("/course/**")
 				.addPathPatterns("/exam/**")
-				.addPathPatterns("/library/**")
+				.addPathPatterns("/library/borrowed")
 				.addPathPatterns("/score/**");
 	}
 }

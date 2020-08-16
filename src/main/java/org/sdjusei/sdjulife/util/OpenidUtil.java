@@ -5,9 +5,9 @@ import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.UnsupportedMimeTypeException;
-import org.sdjusei.sdjulife.domain.Code2SessionResult;
-import org.sdjusei.sdjulife.domain.ResultEnum;
 import org.sdjusei.sdjulife.exception.CommonException;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
+import org.sdjusei.sdjulife.model.response.Code2SessionResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

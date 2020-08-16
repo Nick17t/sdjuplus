@@ -1,8 +1,8 @@
 package org.sdjusei.sdjulife.exceptionhandler;
 
 import org.jsoup.HttpStatusException;
-import org.sdjusei.sdjulife.domain.Result;
-import org.sdjusei.sdjulife.domain.ResultEnum;
+import org.sdjusei.sdjulife.model.domain.Result;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
 import org.sdjusei.sdjulife.util.OpenidUtil;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

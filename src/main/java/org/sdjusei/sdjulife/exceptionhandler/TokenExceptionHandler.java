@@ -2,8 +2,8 @@ package org.sdjusei.sdjulife.exceptionhandler;
 
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import org.sdjusei.sdjulife.domain.Result;
-import org.sdjusei.sdjulife.domain.ResultEnum;
+import org.sdjusei.sdjulife.model.domain.Result;
+import org.sdjusei.sdjulife.model.domain.ResultEnum;
 import org.sdjusei.sdjulife.util.TokenUtil;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
