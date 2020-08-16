@@ -44,7 +44,13 @@ public class CardService {
 	 * @return 余额
 	 */
 	public String getBalance(Document page) {
-		return page.getElementsByTag("dd").get(0).getElementsByTag("p").get(1).html().split("：")[1].replaceAll("元", "");
+		return page.getElementsByTag("dd")
+				.get(0)
+				.getElementsByTag("p")
+				.get(1)
+				.html()
+				.split("：")[1]
+				.replaceAll("元", "");
 	}
 
 	/**

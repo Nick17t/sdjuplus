@@ -47,7 +47,8 @@ public enum ResultEnum {
 	SCHOOL_SYS_LOGIN_TIMEOUT("C00211", "学校系统登录超时"),
 	EMS_COURSE_GET_FAIL("C00212", "课表获取失败"),
 	EMS_SCORE_GET_FAIL("C00213", "成绩获取失败"),
-	EMS_EXAM_GET_FAIL("C00214", "考试信息获取失败");
+	EMS_EXAM_GET_FAIL("C00214", "考试信息获取失败"),
+	LIB_SYS_LOCATION_GET_FAIL("C00215", "图书在馆信息获取失败");
 
 	private final String code;
 	private final String message;

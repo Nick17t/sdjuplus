@@ -26,5 +26,10 @@ unifiedSys:
 cardSys:
   homePageUrl: https://card.sdju.edu.cn/epay/myepay/index
 
+librarySys:
+  searchUrl: https://mylib.sdju.edu.cn/opac/search
+  bookLocationUrl: https://mylib.sdju.edu.cn/opac/book/holdingPreviews
+  borrowRecordUrl: https://mylib.sdju.edu.cn/opac/special/toOpac
+
 token:
   expireTime: 259200000
