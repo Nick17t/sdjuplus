@@ -38,3 +38,6 @@ librarySys:
 
 token:
   expireTime: 259200000
+
+schoolNotice:
+  expireTime: 86400000

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 
 /**
- * 拦截器配置文件
+ * 拦截器配置类
  *
  * @author zcz
  * @date 2020/07/24
@@ -27,7 +27,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 		//小程序登录拦截器
 		registry.addInterceptor(userLoginInterceptor)
 				.addPathPatterns("/**")
-				.excludePathPatterns("/**/login");
+				.excludePathPatterns("/**/login")
+				.excludePathPatterns("/school-notice/**");
 		//统一认证系统登录拦截器
 		registry.addInterceptor(unifiedSysInterceptor)
 				.addPathPatterns("/card/**")

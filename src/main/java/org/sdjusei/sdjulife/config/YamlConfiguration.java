@@ -8,6 +8,12 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.util.Objects;
 
+/**
+ * yaml配置类，解决无法注解加载自定义yaml配置文件的问题
+ *
+ * @author zcz
+ * @date 2020/08/14
+ */
 @Configuration
 public class YamlConfiguration {
 	@Bean
