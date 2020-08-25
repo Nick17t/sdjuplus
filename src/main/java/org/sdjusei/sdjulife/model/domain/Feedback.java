@@ -13,9 +13,8 @@ import java.util.Date;
 @Data
 public class Feedback {
 	private Integer feedbackNumber;
-	private Integer stuId;
+	private Integer userId;
 	private String title;
 	private String describe;
-	private Date submitTime;
-	private Integer adminId;
+	private Date time;
 }

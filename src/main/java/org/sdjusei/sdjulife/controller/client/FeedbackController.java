@@ -2,11 +2,12 @@ package org.sdjusei.sdjulife.controller.client;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sdjusei.sdjulife.model.domain.Feedback;
 import org.sdjusei.sdjulife.model.domain.Result;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.sdjusei.sdjulife.service.FeedbackSubmitService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * 信息反馈控制层
@@ -19,21 +20,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/feedback")
 public class FeedbackController {
 
+	@Resource
+	private FeedbackSubmitService feedbackSubmitService;
+
+	 /**
+	 * 反馈信息提交方法
+	 *
+	 * @param token token，用于读取用户ID
+	 * @param feedback 反馈信息主体
+	 */
 	@ApiOperation("提交反馈")
 	@PostMapping("/submit")
-	public Result<Void> submit() {
-		return Result.success();
-	}
-
-	@ApiOperation("查看反馈")
-	@PostMapping("/list")
-	public Result<Void> list() {
-		return Result.success();
-	}
-
-	@ApiOperation("删除反馈")
-	@GetMapping("/delete")
-	public Result<Void> delete() {
+	public Result<Void> submit(@CookieValue String token,
+	                           @RequestBody Feedback feedback) {
+		feedbackSubmitService.submit(token, feedback);
 		return Result.success();
 	}
 }

@@ -34,6 +34,7 @@ public enum ResultEnum {
 	USER_REGISTER_FAIL("B00020", "用户注册失败"),
 	USER_LOGOFF_FAIL("B00021", "用户注销失败"),
 	USER_UPDATE_FAIL("B00022", "用户信息更新失败"),
+	FEEDBACK_SUBMIT_FAIL("B00030", "反馈信息提交失败"),
 
 	THIRD_PARTY_ERROR("C00001", "第三方服务错误"),
 	OPENID_GET_ERROR("C00100", "openid获取错误"),
